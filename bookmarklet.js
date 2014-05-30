@@ -1,6 +1,6 @@
 (function(){
   javascript('//code.jquery.com/jquery-1.11.0.min.js');
-  javascript('/client.js');
+  javascript('/client.js?' + (new Date().getTime()));
 
   function javascript(url) {
     var script = document.createElement('script');
