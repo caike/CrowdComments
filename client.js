@@ -14,9 +14,20 @@
         }
 
         if(selection.toString() !== ''){
-          alert('"' + selection.toString() + '" was selected at ' + e.pageX + '/' + e.pageY);
+          var description = prompt('Insert your comment:');
+          var comment = {
+            description: description,
+            selectedText: selection.toString(),
+          }
+          post(comment);
         }
       });
   });
+
+  function post(data) {
+    $.post('http://localhost:3000/comments', { comment: data }, function(response) {
+      console.log(response);
+    });
+  }
 }(jQuery, window))
 
