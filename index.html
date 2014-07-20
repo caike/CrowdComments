@@ -4,6 +4,47 @@
   <meta charset="UTF-8">
   <title></title>
 </head>
+<style>
+  .cc-box {
+    outline:none;
+    display: none;
+  }
+  .cc-highlight {
+    background: #FCFFAC;
+  }
+  .cc-box strong {line-height:30px;}
+  .cc-box {text-decoration:none;}
+  .cc-box span {
+    z-index:10;display:none; padding:14px 20px;
+    /*margin-top:-30px; margin-left:28px;*/
+    position: absolute;
+    right: 0;
+    margin-right: 15px;
+    top: 0;
+    margin-top: 15px;
+    width:240px; line-height:16px;
+  }
+  .cc-box span{
+    display:inline; position:absolute; color:#111;
+    border:1px solid #DCA;
+    background: #C9F3D8;
+    background: rgba(131, 226, 150, 0.85);
+  }
+
+  .callout {z-index:20;position:absolute;top:30px;border:0;left:-12px;}
+
+  /*CSS3 extras*/
+  .cc-box span
+  {
+    border-radius:4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+
+    -moz-box-shadow: 5px 5px 8px #CCC;
+    -webkit-box-shadow: 5px 5px 8px #CCC;
+    box-shadow: 5px 5px 8px #CCC;
+  }
+</style>
 <body>
   <h1>Object.observe</h1>
   <p>
@@ -22,5 +63,17 @@
       Activate
     </a>
   </p>
+
+  <!-- inject this dynamically -->
+  <div class="cc-box">
+    <span>
+      <form>
+        <strong>Comment:</strong><br />
+        <textarea name="comment[description]" cols="30" rows="4"></textarea>
+        <input type="submit" value="Send" />
+      </form>
+    </span>
+  </div>
+
 </body>
 </html>

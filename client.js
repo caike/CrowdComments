@@ -1,11 +1,12 @@
 (function($, globals){
 
-  //console.log('loading client.js');
+  console.log('loading client.js');
 
   $(function(){
     $('body').on('mouseup',
       function(e){
-        var selection;
+        var selection = null;
+        var selectionText = null;
 
         if (globals.getSelection) {
           selection = globals.getSelection();
@@ -13,13 +14,29 @@
           selection = globals.document.selection.createRange();
         }
 
-        if(selection.toString() !== ''){
-          var description = prompt('Insert your comment:');
-          var comment = {
-            description: description,
-            selectedText: selection.toString(),
-          }
-          post(comment);
+        selectionText = selection.toString();
+
+        if(selectionText !== ''){
+          var targetElement = $(e.target);
+          var entireSection = targetElement.html();
+          var highlightedText = "<span class='cc-highlight'>"+selectionText+ "</span>";
+          var highlightedSection = entireSection.replace(selectionText, highlightedText);
+
+          targetElement.html(highlightedSection);
+
+          var commentBox = $('.cc-box')
+          commentBox.show();
+          commentBox.find('form').on('submit', function(e) {
+            e.preventDefault();
+            var textArea = $(this).find('textarea');
+            var comment = {
+              description: textArea.val(),
+              selectedText: selectionText
+            }
+            post(comment);
+            commentBox.hide();
+            textArea.val('');
+          });
         }
       });
   });
@@ -29,5 +46,5 @@
       console.log(response);
     });
   }
-}(jQuery, window))
+}(jQuery, window));
 
